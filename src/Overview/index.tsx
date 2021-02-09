@@ -34,7 +34,7 @@ function Overview() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={9} md={10}>
           <TextField className={classes.textfield} fullWidth onChange={event => setNewTodoTitle(event.target.value)} onKeyPress={event => {
-            if (event.key === "Enter") {
+            if (event.key === "Enter" && newTodoTitle.length > 0) {
               dispatch(actions.create({title: newTodoTitle}));
               setNewTodoTitle("");
             }
