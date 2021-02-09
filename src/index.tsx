@@ -1,26 +1,26 @@
 import DateFnsUtils from "@date-io/date-fns";
-import {ThemeProvider} from "@material-ui/core";
-import {MuiPickersUtilsProvider} from "@material-ui/pickers";
+import { ThemeProvider } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "fontsource-roboto";
 import React from "react";
 import ReactDOM from "react-dom";
-import {Provider as StoreProvider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import { Provider as StoreProvider } from "react-redux";
+import { HashRouter } from "react-router-dom";
 import App from "./App";
-import {store} from "./redux/store";
+import { store } from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
-import {theme} from "./theme";
+import { theme } from "./theme";
 
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <ThemeProvider theme={theme}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <App/>
+            <App />
           </MuiPickersUtilsProvider>
         </ThemeProvider>
-      </BrowserRouter>
+      </HashRouter>
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
