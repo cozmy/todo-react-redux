@@ -1,4 +1,4 @@
-# Todo App example using Typescript, Redux Toolkit, React, and React Router
+# Todo App example using React, Redux Toolkit, Typescript, and React Router
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and used [Gnome TODO](https://wiki.gnome.org/Apps/Todo) as inspiration.
 
@@ -20,7 +20,7 @@ The Redux Toolkit package is intended to be the standard way to write Redux logi
 - `<Overview />` - connects to Redux to get all the Todos via `selectAll` or incomplete ones via `selectAllIncomplete`; it also dispatches `create` actions
 - `<Todo title description completionDate dueDate priority />` - used to render a Todo and to dispatch `update` and `remove` actions
 
-*Although the implementation is in React, this component structure would also work in Svelte, Vue, or Angular.*
+_Although the implementation is in React, this component structure would also work in Svelte, Vue, or Angular._
 
 ### Redux Structure
 
@@ -66,7 +66,7 @@ const todosAdapter = createEntityAdapter<Todo>({
 A function that accepts an initial state, an object full of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
 
 ```typescript
-export const {actions, reducer} = createSlice({
+export const { actions, reducer } = createSlice({
   name: "todos",
   initialState: filledState,
   reducers: {
@@ -75,9 +75,9 @@ export const {actions, reducer} = createSlice({
         const payload = new Todo(partialTodo);
         // "Class instances are by definition not fully serializable"
         // See https://stackoverflow.com/questions/61704805/getting-an-error-a-non-serializable-value-was-detected-in-the-state-when-using
-        return {payload: {...payload}};
+        return { payload: { ...payload } };
       },
-      reducer: todosAdapter.addOne
+      reducer: todosAdapter.addOne,
     },
     update: todosAdapter.updateOne,
     remove: todosAdapter.removeOne,
