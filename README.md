@@ -1,5 +1,7 @@
 # Todo App example using React, Redux Toolkit, Typescript, and React Router
 
+![Preview](app-preview.png?raw=true)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and used [Gnome TODO](https://wiki.gnome.org/Apps/Todo) as inspiration.
 
 Its aim is to showcase how easy is to use [Redux Toolkit](https://redux-toolkit.js.org/) instead of pure Redux, while building a todo app.
