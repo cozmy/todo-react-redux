@@ -87,3 +87,5 @@ export const { actions, reducer } = createSlice({
   },
 });
 ```
+
+Or you can check the whole redux code here: [https://github1s.com/cozmy/todo-react-redux/blob/HEAD/src/redux/todos.ts](https://github1s.com/cozmy/todo-react-redux/blob/HEAD/src/redux/todos.ts)
