@@ -1,6 +1,8 @@
-import { Todo, TTodoPriority } from '../types';
+import { Label, Todo, TTodoPriority } from '../types';
 
-export const initialState: Todo[] = [
+export const labelsInitialState: Label[] = [{ ...new Label({ title: "Work" }) }, { ...new Label({ title: "Leisure" }) }, { ...new Label({ title: "Personal" }) }];
+
+export const todosInitialState: Todo[] = [
   { ...new Todo({ description: "It is imperative", title: "Make this app work", priority: TTodoPriority.HIGH, dueDate: "2021-02-27" }) },
   { ...new Todo({ description: "Maybe play some video games?", title: "Relax a bit", dueDate: "2021-02-12" }) },
   { ...new Todo({ title: "Have some fun" }) },

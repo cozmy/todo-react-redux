@@ -47,13 +47,4 @@ export const useStyles = makeStyles((theme) => ({
     color: ({ overdue }: Props) => (overdue ? theme.palette.error.light : theme.palette.text.secondary),
     paddingLeft: theme.spacing(2),
   },
-  priorityAndButton: {
-    alignItems: "flex-end",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  deleteButton: {
-    marginTop: theme.spacing(2),
-  },
 }));

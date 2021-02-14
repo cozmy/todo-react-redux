@@ -6,7 +6,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TState } from '../redux/store';
-import { actions, selectors } from '../redux/todos';
+import { selectors, todosActions } from '../redux/todos';
 import Todo from '../Todo';
 
 export const useStyles = makeStyles({
@@ -42,7 +42,7 @@ function Overview() {
             onChange={(event) => setNewTodoTitle(event.target.value)}
             onKeyPress={(event) => {
               if (event.key === "Enter" && newTodoTitle.length > 0) {
-                dispatch(actions.create({ title: newTodoTitle }));
+                dispatch(todosActions.create({ title: newTodoTitle }));
                 setNewTodoTitle("");
               }
             }}
