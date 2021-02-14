@@ -1,11 +1,21 @@
-import { TextField } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
+import { MenuItem, TextField, TextFieldProps } from '@material-ui/core';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const options = [{ title: "Work" }, { title: "Personal" }, { title: "Leisure" }];
+import { labelsSelectors } from '../redux/labels';
 
-function Labels() {
-  return <Autocomplete multiple options={options} getOptionLabel={(option) => option.title} renderInput={(params) => <TextField {...params} fullWidth label="Labels" />} />;
+function Labels({ SelectProps, ...rest }: Partial<TextFieldProps>) {
+  const labels = useSelector(labelsSelectors.selectAll);
+
+  return (
+    <TextField fullWidth label="Labels" select SelectProps={{ multiple: true, ...SelectProps }} {...rest}>
+      {labels.map((label) => (
+        <MenuItem key={label.id} value={label.id}>
+          {label.title}
+        </MenuItem>
+      ))}
+    </TextField>
+  );
 }
 
 export default React.memo(Labels);
