@@ -21,7 +21,7 @@ function Todo({ id, title, description, completionDate, dueDate, priority }: Tod
 
   return (
     <Box className={classes.root}>
-      <Accordion className={classes.accordion}>
+      <Accordion className={classes.accordion} TransitionProps={{ unmountOnExit: true }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.accordionSummaryContent} onClick={(event) => event.stopPropagation()} onFocus={(event) => event.stopPropagation()}>
             <Checkbox
