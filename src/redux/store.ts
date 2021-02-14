@@ -1,8 +1,9 @@
-import {configureStore} from "@reduxjs/toolkit";
-import {reducer} from "./todos";
+import { configureStore } from '@reduxjs/toolkit';
+
+import { reducer } from './todos';
 
 export const store = configureStore({
-  reducer
+  reducer,
 });
 
 export type TState = ReturnType<typeof store.getState>;

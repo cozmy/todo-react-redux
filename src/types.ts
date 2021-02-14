@@ -1,16 +1,16 @@
-import {nanoid} from "@reduxjs/toolkit";
+import { nanoid } from '@reduxjs/toolkit';
 
 export type TList = {
   id: string;
   name: string;
   creationDate: Date | string;
-}
+};
 
 export enum TTodoPriority {
   NONE = 0,
   LOW = 1,
   MEDIUM = 2,
-  HIGH = 3
+  HIGH = 3,
 }
 
 export const dateFormat = "dd.MM.yyyy";
@@ -24,7 +24,7 @@ export class Todo {
   priority: TTodoPriority;
   completionDate?: Date | string;
 
-  constructor({id = undefined, title = "", description = "", creationDate = undefined, dueDate = undefined, priority = TTodoPriority.NONE, completionDate = undefined}: Partial<Todo>) {
+  constructor({ id = undefined, title = "", description = "", creationDate = undefined, dueDate = undefined, priority = TTodoPriority.NONE, completionDate = undefined }: Partial<Todo>) {
     this.id = id ?? nanoid();
     this.title = title;
     this.description = description;
