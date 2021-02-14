@@ -28,4 +28,4 @@ export const { actions: labelsActions, reducer: labelsReducer } = createSlice({
   },
 });
 
-export const selectors = { ...labelsAdapter.getSelectors((state: TState) => state.labels) };
+export const labelsSelectors = { ...labelsAdapter.getSelectors((state: TState) => state.labels) };

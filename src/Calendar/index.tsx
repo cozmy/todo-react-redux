@@ -2,7 +2,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectors } from '../redux/todos';
+import { todosSelectors } from '../redux/todos';
 import Todo from '../Todo';
 import happyIcon from './happy.svg';
 
@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
 
 function Calendar() {
   const classes = useStyles();
-  const todos = useSelector(selectors.selectWithDueDate);
+  const todos = useSelector(todosSelectors.selectWithDueDate);
 
   return (
     <div>

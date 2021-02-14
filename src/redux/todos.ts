@@ -60,4 +60,4 @@ const selectWithDueDate = createDraftSafeSelector(selectAllIncomplete, (state) =
     .map((value) => ({ ...value, formatedDueDate: format(new Date(value.dueDate as string), dateFormat) }))
 );
 
-export const selectors = { ...defaultSelectors, selectAllIncomplete, selectWithDueDate };
+export const todosSelectors = { ...defaultSelectors, selectAllIncomplete, selectWithDueDate };

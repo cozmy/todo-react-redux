@@ -10,7 +10,7 @@ import { todosActions } from '../redux/todos';
 import { dateFormat, Todo as TodoClass, TTodoPriority } from '../types';
 import { useStyles } from './styles';
 
-function Todo({ id, title, description, completionDate, dueDate, priority }: TodoClass) {
+function Todo({ id, title, description, completionDate, dueDate, labels, priority }: TodoClass) {
   const dispatch = useDispatch();
 
   const remove = React.useCallback(() => dispatch(todosActions.remove(id)), [id]);
@@ -73,7 +73,7 @@ function Todo({ id, title, description, completionDate, dueDate, priority }: Tod
                   </TextField>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
-                  <Labels />
+                  <Labels onChange={(event) => update({ labels: event.target.value })} value={labels} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                   <Button onClick={remove}>Delete</Button>

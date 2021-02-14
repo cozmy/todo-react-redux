@@ -6,7 +6,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TState } from '../redux/store';
-import { selectors, todosActions } from '../redux/todos';
+import { todosActions, todosSelectors } from '../redux/todos';
 import Todo from '../Todo';
 
 export const useStyles = makeStyles({
@@ -24,8 +24,8 @@ function Overview() {
   const [newTodoTitle, setNewTodoTitle] = React.useState("");
   const [showDone, setShowDone] = React.useState(false);
 
-  const todos = useSelector(showDone ? selectors.selectAll : selectors.selectAllIncomplete);
-  const finishedCount = useSelector((state: TState) => selectors.selectAll(state).length - selectors.selectAllIncomplete(state).length);
+  const todos = useSelector(showDone ? todosSelectors.selectAll : todosSelectors.selectAllIncomplete);
+  const finishedCount = useSelector((state: TState) => todosSelectors.selectAll(state).length - todosSelectors.selectAllIncomplete(state).length);
   const dispatch = useDispatch();
 
   return (
