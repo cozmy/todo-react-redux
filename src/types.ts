@@ -1,5 +1,15 @@
 import { nanoid } from '@reduxjs/toolkit';
 
+export class Label {
+  id: string;
+  title: string;
+
+  constructor({ id = undefined, title = "" }) {
+    this.id = id ?? nanoid();
+    this.title = title;
+  }
+}
+
 export type TList = {
   id: string;
   name: string;
