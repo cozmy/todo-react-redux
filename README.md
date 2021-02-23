@@ -3,7 +3,9 @@
 ![Preview](preview-1.png?raw=true)
 ![Preview](preview-2.png?raw=true)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and used [Gnome TODO](https://wiki.gnome.org/Apps/Todo) as inspiration. To start it, run `npm install` and then `npm start`.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses [Gnome TODO](https://wiki.gnome.org/Apps/Todo) as inspiration. 
+
+To start it, run `npm install` and then `npm start`.
 
 Its aim is to showcase how easy is to use [Redux Toolkit](https://redux-toolkit.js.org/) instead of pure Redux, while building a todo app.
 
