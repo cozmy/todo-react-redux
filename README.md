@@ -51,7 +51,7 @@ There are only 3 actions:
 - `update({id, changes}: {id: string; changes: Partial<Todo>})`
 - `remove(id: string)`
 
-From Redux Toolkit, these two are the main functions that were used:
+These are the two main functions from Redux Toolkit that were used:
 
 #### [createEntityAdapter](https://redux-toolkit.js.org/api/createEntityAdapter)
 
