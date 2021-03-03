@@ -13,9 +13,6 @@ export const theme = createMuiTheme({
       size: "small",
       variant: "outlined",
     },
-    MuiChip: {
-      size: "small",
-    },
     MuiSelect: {
       MenuProps: {
         variant: "menu",
