@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { createDraftSafeSelector, createEntityAdapter, createSlice, EntityId } from '@reduxjs/toolkit';
 
 import { Label } from '../types';
 import { labelsInitialState } from './initialState';
@@ -28,4 +28,14 @@ export const { actions: labelsActions, reducer: labelsReducer } = createSlice({
   },
 });
 
-export const labelsSelectors = { ...labelsAdapter.getSelectors((state: TState) => state.labels) };
+const defaultSelectors = labelsAdapter.getSelectors((state: TState) => state.labels);
+
+const selectByIds = createDraftSafeSelector([defaultSelectors.selectEntities, defaultSelectors.selectIds, (state: any, ids: EntityId[]) => ids], (entities, idsOrder, idsToPick) => {
+  return idsOrder.reduce((acc, val) => {
+    if (idsToPick.includes(val)) acc.push(entities[val] as Label);
+
+    return acc;
+  }, [] as Label[]);
+});
+
+export const labelsSelectors = { ...defaultSelectors, selectByIds };

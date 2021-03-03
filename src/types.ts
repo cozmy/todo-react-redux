@@ -33,7 +33,7 @@ export class Todo {
   dueDate?: Date | string;
   priority: TTodoPriority;
   completionDate?: Date | string;
-  labels: Array<Pick<Label, "id">>;
+  labels: Array<Label["id"]>;
 
   constructor({ id = undefined, title = "", description = "", creationDate = undefined, dueDate = undefined, priority = TTodoPriority.NONE, completionDate = undefined }: Partial<Todo>) {
     this.id = id ?? nanoid();

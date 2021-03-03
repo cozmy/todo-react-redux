@@ -1,11 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, Grid, Input, MenuItem, TextField, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, Grid, Hidden, Input, MenuItem, TextField, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { format } from 'date-fns';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import Labels from '../Labels';
+import LabelsPreview from '../Labels/LabelsPreview';
+import LabelsSelect from '../Labels/LabelsSelect';
 import { todosActions } from '../redux/todos';
 import { dateFormat, Todo as TodoClass, TTodoPriority } from '../types';
 import { useStyles } from './styles';
@@ -31,6 +32,9 @@ function Todo({ id, title, description, completionDate, dueDate, labels, priorit
               }}
             />
             <Input className={classes.title} fullWidth onChange={(event) => update({ title: event.target.value })} value={title} />
+            <Hidden smDown>
+              <LabelsPreview value={labels} />
+            </Hidden>
             {dueDate ? (
               <Typography className={classes.dueDate} variant="body2">
                 {format(new Date(dueDate), "dd.MM.yyyy")}
@@ -73,7 +77,7 @@ function Todo({ id, title, description, completionDate, dueDate, labels, priorit
                   </TextField>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
-                  <Labels onChange={(event) => update({ labels: event.target.value })} value={labels} />
+                  <LabelsSelect onChange={(event) => update({ labels: event.target.value })} value={labels} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                   <Button onClick={remove}>Delete</Button>

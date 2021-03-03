@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { labelsSelectors } from '../redux/labels';
 
-function Labels({ SelectProps, ...rest }: Partial<TextFieldProps>) {
+function LabelsSelect({ SelectProps, ...rest }: Partial<TextFieldProps>) {
   const labels = useSelector(labelsSelectors.selectAll);
 
   return (
@@ -18,4 +18,4 @@ function Labels({ SelectProps, ...rest }: Partial<TextFieldProps>) {
   );
 }
 
-export default React.memo(Labels);
+export default React.memo(LabelsSelect);
