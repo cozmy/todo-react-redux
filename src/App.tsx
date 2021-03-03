@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, CssBaseline, Drawer, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Container, CssBaseline, Drawer, IconButton, makeStyles, Toolbar, Typography, useMediaQuery, useTheme } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -44,7 +44,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const [drawerOpen, setDrawerOpen] = React.useState(true);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"), {
+    noSsr: true,
+  });
+
+  const [drawerOpen, setDrawerOpen] = React.useState(matches);
+
+  React.useEffect(() => setDrawerOpen(matches), [matches]);
+
   const classes = useStyles();
 
   return (
