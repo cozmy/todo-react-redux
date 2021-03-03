@@ -1,13 +1,14 @@
-import { Button, Grid, InputAdornment, makeStyles, TextField } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Button, Grid, InputAdornment, makeStyles, TextField } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { TState } from '../redux/store';
-import { todosActions, todosSelectors } from '../redux/todos';
-import Todo from '../Todo';
+import { TState } from "../redux/store";
+import { todosActions, todosSelectors } from "../redux/todos";
+import Todo from "../Todo";
 
 export const useStyles = makeStyles({
   textfield: {
@@ -19,13 +20,17 @@ export const useStyles = makeStyles({
 });
 
 function Overview() {
+  const { id: labelId } = useParams<{ id: string }>();
+
   const classes = useStyles();
 
   const [newTodoTitle, setNewTodoTitle] = React.useState("");
   const [showDone, setShowDone] = React.useState(false);
 
-  const todos = useSelector(showDone ? todosSelectors.selectAll : todosSelectors.selectAllIncomplete);
-  const finishedCount = useSelector((state: TState) => todosSelectors.selectAll(state).length - todosSelectors.selectAllIncomplete(state).length);
+  // @ts-ignore - TS thinks that selectAll needs only 1 argument
+  const todos = useSelector((state: TState) => (showDone ? todosSelectors.selectAll(state, labelId) : todosSelectors.selectAllIncomplete(state, labelId)));
+  // @ts-ignore - TS thinks that selectAll needs only 1 argument
+  const finishedCount = useSelector((state: TState) => todosSelectors.selectAll(state, labelId).length - todosSelectors.selectAllIncomplete(state, labelId).length);
   const dispatch = useDispatch();
 
   return (

@@ -1,9 +1,9 @@
-import { createDraftSafeSelector, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { format } from 'date-fns';
+import { createDraftSafeSelector, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { format } from "date-fns";
 
-import { dateFormat, Todo } from '../types';
-import { todosInitialState } from './initialState';
-import { TState } from './store';
+import { dateFormat, Label, Todo } from "../types";
+import { todosInitialState } from "./initialState";
+import { TState } from "./store";
 
 const applyDueDateSorting = (a: Todo, b: Todo) => (a.dueDate ? new Date(a.dueDate).getTime() : Infinity) - (b.dueDate ? new Date(b.dueDate).getTime() : Infinity);
 
@@ -51,7 +51,9 @@ export const { actions: todosActions, reducer: todosReducer } = createSlice({
 
 const defaultSelectors = todosAdapter.getSelectors((state: TState) => state.todos);
 
-const selectAllIncomplete = createDraftSafeSelector(defaultSelectors.selectAll, (state) => state.filter((value) => !value.completionDate));
+const selectAll = createDraftSafeSelector([defaultSelectors.selectAll, (state: any, labelId?: Label["id"]) => labelId], (state, labelId) => (labelId ? state.filter((value) => value.labels.includes(labelId)) : state));
+
+const selectAllIncomplete = createDraftSafeSelector(selectAll, (state) => state.filter((value) => !value.completionDate));
 
 const selectWithDueDate = createDraftSafeSelector(selectAllIncomplete, (state) =>
   state
@@ -60,4 +62,4 @@ const selectWithDueDate = createDraftSafeSelector(selectAllIncomplete, (state) =
     .map((value) => ({ ...value, formatedDueDate: format(new Date(value.dueDate as string), dateFormat) }))
 );
 
-export const todosSelectors = { ...defaultSelectors, selectAllIncomplete, selectWithDueDate };
+export const todosSelectors = { ...defaultSelectors, selectAll, selectAllIncomplete, selectWithDueDate };

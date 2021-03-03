@@ -1,12 +1,12 @@
-import { Collapse, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Collapse, List, ListItem, ListItemText, makeStyles } from "@material-ui/core";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import React from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-import { labelsSelectors } from '../redux/labels';
-import { routes } from '../routes';
+import { labelsSelectors } from "../redux/labels";
+import { routes } from "../routes";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -40,7 +40,7 @@ function NavigationMenu() {
       <Collapse in={open} timeout="auto">
         <List component="div" disablePadding>
           {labels.map((label) => (
-            <ListItem button className={classes.nested} key={label.id}>
+            <ListItem button component={NavLink} to={routes.label.to(label.id)} className={classes.nested} activeClassName={classes.linkActive} key={label.id}>
               <ListItemText secondary={label.title} />
             </ListItem>
           ))}
