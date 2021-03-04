@@ -11,6 +11,7 @@ const labelsAdapter = createEntityAdapter<Label>({
 const emptyInitialState = labelsAdapter.getInitialState();
 const filledState = labelsAdapter.upsertMany(emptyInitialState, labelsInitialState);
 
+// TODO LabelsActions will be used in the "Labels Management" Route
 export const { actions: labelsActions, reducer: labelsReducer } = createSlice({
   name: "labels",
   initialState: filledState,

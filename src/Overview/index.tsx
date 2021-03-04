@@ -5,6 +5,7 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { labelsSelectors } from "../redux/labels";
 
 import { TState } from "../redux/store";
 import { todosActions, todosSelectors } from "../redux/todos";
@@ -20,9 +21,10 @@ export const useStyles = makeStyles({
 });
 
 function Overview() {
-  const { id: labelId } = useParams<{ id: string }>();
-
   const classes = useStyles();
+
+  const { id: labelId } = useParams<{ id: string }>();
+  const label = useSelector((state: TState) => labelsSelectors.selectById(state, labelId));
 
   const [newTodoTitle, setNewTodoTitle] = React.useState("");
   const [showDone, setShowDone] = React.useState(false);
@@ -47,7 +49,8 @@ function Overview() {
             onChange={(event) => setNewTodoTitle(event.target.value)}
             onKeyPress={(event) => {
               if (event.key === "Enter" && newTodoTitle.length > 0) {
-                dispatch(todosActions.create({ title: newTodoTitle }));
+                const labels = labelId ? [labelId] : [];
+                dispatch(todosActions.create({ title: newTodoTitle, labels }));
                 setNewTodoTitle("");
               }
             }}
@@ -56,14 +59,15 @@ function Overview() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AddIcon />
+                  <AddIcon/>
                 </InputAdornment>
               ),
+              endAdornment: (label ? label.title : null)
             }}
           />
         </Grid>
         <Grid item xs={12} sm={3} md={2}>
-          <Button className={classes.button} fullWidth onClick={() => setShowDone(!showDone)} size="medium" startIcon={showDone ? <VisibilityOffIcon /> : <VisibilityIcon />} variant="text">
+          <Button className={classes.button} fullWidth onClick={() => setShowDone(!showDone)} size="medium" startIcon={showDone ? <VisibilityOffIcon/> : <VisibilityIcon/>} variant="text">
             Done ({finishedCount})
           </Button>
         </Grid>

@@ -3,6 +3,7 @@ import { nanoid } from "@reduxjs/toolkit";
 export class Label {
   id: string;
   title: string;
+  // TODO add a `color?: string;` property
 
   constructor({ id = undefined, title = "" }: Partial<Label>) {
     this.id = id ?? nanoid();
