@@ -1,7 +1,9 @@
-import {createDraftSafeSelector, createEntityAdapter, createSlice} from "@reduxjs/toolkit";
-import {format} from "date-fns";
-import {dateFormat, Todo} from "../types";
-import {initialState} from "./initialState";
+import { createDraftSafeSelector, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { format } from "date-fns";
+
+import { dateFormat, Label, Todo } from "../types";
+import { todosInitialState } from "./initialState";
+import { TState } from "./store";
 
 const applyDueDateSorting = (a: Todo, b: Todo) => (a.dueDate ? new Date(a.dueDate).getTime() : Infinity) - (b.dueDate ? new Date(b.dueDate).getTime() : Infinity);
 
@@ -27,9 +29,9 @@ const todosAdapter = createEntityAdapter<Todo>({
 });
 
 const emptyInitialState = todosAdapter.getInitialState();
-const filledState = todosAdapter.upsertMany(emptyInitialState, initialState);
+const filledState = todosAdapter.upsertMany(emptyInitialState, todosInitialState);
 
-export const {actions, reducer} = createSlice({
+export const { actions: todosActions, reducer: todosReducer } = createSlice({
   name: "todos",
   initialState: filledState,
   reducers: {
@@ -38,29 +40,26 @@ export const {actions, reducer} = createSlice({
         const payload = new Todo(partialTodo);
         // "Class instances are by definition not fully serializable"
         // See https://stackoverflow.com/questions/61704805/getting-an-error-a-non-serializable-value-was-detected-in-the-state-when-using
-        return {payload: {...payload}};
+        return { payload: { ...payload } };
       },
-      reducer: todosAdapter.addOne
+      reducer: todosAdapter.addOne,
     },
     update: todosAdapter.updateOne,
     remove: todosAdapter.removeOne,
   },
 });
 
-const defaultSelectors = todosAdapter.getSelectors();
+const defaultSelectors = todosAdapter.getSelectors((state: TState) => state.todos);
 
-const selectAllIncomplete = createDraftSafeSelector(
-  defaultSelectors.selectAll,
-  state => state
-    .filter(value => !value.completionDate)
-);
+const selectAll = createDraftSafeSelector([defaultSelectors.selectAll, (state: any, labelId?: Label["id"]) => labelId], (state, labelId) => (labelId ? state.filter((value) => value.labels.includes(labelId)) : state));
 
-const selectWithDueDate = createDraftSafeSelector(
-  selectAllIncomplete,
-  state => state
-    .filter(value => value.dueDate)
+const selectAllIncomplete = createDraftSafeSelector(selectAll, (state) => state.filter((value) => !value.completionDate));
+
+const selectWithDueDate = createDraftSafeSelector(selectAllIncomplete, (state) =>
+  state
+    .filter((value) => value.dueDate)
     .sort(applyDueDateSorting)
-    .map(value => ({...value, formatedDueDate: format(new Date(value.dueDate as string), dateFormat)}))
+    .map((value) => ({ ...value, formatedDueDate: format(new Date(value.dueDate as string), dateFormat) }))
 );
 
-export const selectors = {...defaultSelectors, selectAllIncomplete, selectWithDueDate};
+export const todosSelectors = { ...defaultSelectors, selectAll, selectAllIncomplete, selectWithDueDate };

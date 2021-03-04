@@ -1,4 +1,4 @@
-import {createMuiTheme} from "@material-ui/core";
+import { createMuiTheme } from '@material-ui/core';
 
 export const theme = createMuiTheme({
   palette: {
@@ -7,11 +7,25 @@ export const theme = createMuiTheme({
   props: {
     MuiTextField: {
       margin: "dense",
-      variant: "outlined"
+      variant: "outlined",
     },
     MuiButton: {
       size: "small",
-      variant: "outlined"
-    }
-  }
+      variant: "outlined",
+    },
+    MuiSelect: {
+      MenuProps: {
+        variant: "menu",
+        getContentAnchorEl: null,
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+        transformOrigin: {
+          vertical: "top",
+          horizontal: "center",
+        },
+      },
+    },
+  },
 });

@@ -2,10 +2,18 @@
 
 ![Preview](preview-1.png?raw=true)
 ![Preview](preview-2.png?raw=true)
+![Preview](preview-3.png?raw=true)
+![Preview](preview-4.png?raw=true)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and used [Gnome TODO](https://wiki.gnome.org/Apps/Todo) as inspiration.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses [Gnome TODO](https://wiki.gnome.org/Apps/Todo) as inspiration. 
 
-Its aim is to showcase how easy is to use [Redux Toolkit](https://redux-toolkit.js.org/) instead of pure Redux, while building a todo app.
+To start it, run `npm install` and then `npm start`.
+
+Its aim is to showcase how easy is to use [Redux ToolKit](https://redux-toolkit.js.org/) (RTK) instead of pure Redux, while building a todo app. RTK includes utilities that help simplify many common use cases, including [store setup](https://redux-toolkit.js.org/api/configureStore), [creating reducers and writing immutable update logic](https://redux-toolkit.js.org/api/createreducer), and even [creating entire "slices" of state at once](https://redux-toolkit.js.org/api/createslice).
+
+**Two smaller demos are set up on CodeSandbox:**
+- [One for createSlice](https://codesandbox.io/s/createslice-playground-idwi3?file=/src/index.js)
+- [One for createEntityAdapter](https://codesandbox.io/s/createentityadapter-playground-cm5ye?file=/src/index.js)
 
 ### Motivation
 
@@ -18,18 +26,17 @@ The Redux Toolkit package is intended to be the standard way to write Redux logi
 ### Components Structure
 
 - `<App />`
-- `<NavigationMenu />` - this is the navigation menu that is used to switch between Calendar and Overview pages.
+- `<NavigationMenu />` - this is the navigation menu on the left
 - `<Calendar />` - connects to Redux to get all the Todos which have a `dueDate` by using the `selectWithDueDate` selector
-- `<Overview />` - connects to Redux to get all the Todos via `selectAll` or incomplete ones via `selectAllIncomplete`; it also dispatches `create` actions
-- `<Todo title description completionDate dueDate priority />` - used to render a Todo and to dispatch `update` and `remove` actions
+- `<Overview />` - connects to Redux to get all the Todos via `selectAll` or incomplete ones via `selectAllIncomplete`; optionally, if it receives `labelId` as a URL parameter, then it passes this to the aforementioned selectors; it also dispatches `create` actions;
+- `<Todo title description completionDate dueDate labels priority />` - used to render a Todo and to dispatch `update` and `remove` actions
+- `<LabelsSelect {...TextFieldProps} /> and <LabelsPreview value />` - components which help in working with Labels
 
 _Although the implementation is in React, this component structure would also work in Svelte, Vue, or Angular._
 
 ### Redux Structure
 
-The store is used to hold multiple Todos.
-
-A Todo implements this interface:
+The store is used to hold multiple Todos and Labels.
 
 ```typescript
 interface Todo {
@@ -40,16 +47,23 @@ interface Todo {
   dueDate?: Date | string;
   priority: TTodoPriority;
   completionDate?: Date | string;
+  labels: Array<Label["id"]>;
+}
+
+interface Label {
+  id: string;
+  title: string;
+  // TODO add a color?: string; property
 }
 ```
 
 There are only 3 actions:
 
-- `create({title}: {title: string})`
-- `update({id, changes}: {id: string; changes: Partial<Todo>})`
-- `remove(id: string)`
+- `todosActions.create({title}: {title: string})`
+- `todosActions.update({id, changes}: {id: string; changes: Partial<Todo>})`
+- `todosActions.remove(id: string)`
 
-From Redux Toolkit, these two are the main functions that were used:
+These are the two main functions from Redux Toolkit that were used:
 
 #### [createEntityAdapter](https://redux-toolkit.js.org/api/createEntityAdapter)
 
