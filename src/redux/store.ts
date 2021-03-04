@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { reducer } from './todos';
+import { labelsReducer } from './labels';
+import { todosReducer } from './todos';
 
 export const store = configureStore({
-  reducer,
+  reducer: {
+    labels: labelsReducer,
+    todos: todosReducer,
+  },
 });
 
 export type TState = ReturnType<typeof store.getState>;

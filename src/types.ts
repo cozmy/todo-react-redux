@@ -1,4 +1,15 @@
-import { nanoid } from '@reduxjs/toolkit';
+import { nanoid } from "@reduxjs/toolkit";
+
+export class Label {
+  id: string;
+  title: string;
+  // TODO add a `color?: string;` property
+
+  constructor({ id = undefined, title = "" }: Partial<Label>) {
+    this.id = id ?? nanoid();
+    this.title = title;
+  }
+}
 
 export type TList = {
   id: string;
@@ -23,8 +34,9 @@ export class Todo {
   dueDate?: Date | string;
   priority: TTodoPriority;
   completionDate?: Date | string;
+  labels: Array<Label["id"]>;
 
-  constructor({ id = undefined, title = "", description = "", creationDate = undefined, dueDate = undefined, priority = TTodoPriority.NONE, completionDate = undefined }: Partial<Todo>) {
+  constructor({ id = undefined, title = "", description = "", creationDate = undefined, dueDate = undefined, priority = TTodoPriority.NONE, completionDate = undefined, labels = [] }: Partial<Todo>) {
     this.id = id ?? nanoid();
     this.title = title;
     this.description = description;
@@ -32,5 +44,6 @@ export class Todo {
     this.dueDate = dueDate;
     this.priority = priority;
     this.completionDate = completionDate;
+    this.labels = labels;
   }
 }

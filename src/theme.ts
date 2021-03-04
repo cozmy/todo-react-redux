@@ -13,5 +13,19 @@ export const theme = createMuiTheme({
       size: "small",
       variant: "outlined",
     },
+    MuiSelect: {
+      MenuProps: {
+        variant: "menu",
+        getContentAnchorEl: null,
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+        transformOrigin: {
+          vertical: "top",
+          horizontal: "center",
+        },
+      },
+    },
   },
 });

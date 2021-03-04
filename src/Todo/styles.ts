@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core";
 
-import { TTodoPriority } from '../types';
+import { TTodoPriority } from "../types";
 
 type Props = { overdue: boolean; priority: TTodoPriority };
 
@@ -45,15 +45,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   dueDate: {
     color: ({ overdue }: Props) => (overdue ? theme.palette.error.light : theme.palette.text.secondary),
-    paddingLeft: theme.spacing(2),
-  },
-  priorityAndButton: {
-    alignItems: "flex-end",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  deleteButton: {
-    marginTop: theme.spacing(2),
+    paddingLeft: theme.spacing(1),
   },
 }));
