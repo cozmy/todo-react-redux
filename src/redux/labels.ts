@@ -1,8 +1,8 @@
-import { createDraftSafeSelector, createEntityAdapter, createSlice, EntityId } from '@reduxjs/toolkit';
+import { createDraftSafeSelector, createEntityAdapter, createSlice, EntityId } from "@reduxjs/toolkit";
 
-import { Label } from '../types';
-import { labelsInitialState } from './initialState';
-import { TState } from './store';
+import { Label } from "../types";
+import { labelsInitialState } from "./initialState";
+import { TState } from "./store";
 
 const labelsAdapter = createEntityAdapter<Label>({
   sortComparer: (a, b) => a.title.toLocaleLowerCase().localeCompare(b.title.toLocaleLowerCase()),

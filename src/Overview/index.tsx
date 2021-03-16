@@ -59,15 +59,15 @@ function Overview() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AddIcon/>
+                  <AddIcon />
                 </InputAdornment>
               ),
-              endAdornment: (label ? label.title : null)
+              endAdornment: (label ? label.title : null),
             }}
           />
         </Grid>
         <Grid item xs={12} sm={3} md={2}>
-          <Button className={classes.button} fullWidth onClick={() => setShowDone(!showDone)} size="medium" startIcon={showDone ? <VisibilityOffIcon/> : <VisibilityIcon/>} variant="text">
+          <Button className={classes.button} fullWidth onClick={() => setShowDone(!showDone)} size="medium" startIcon={showDone ? <VisibilityOffIcon /> : <VisibilityIcon />} variant="text">
             Done ({finishedCount})
           </Button>
         </Grid>

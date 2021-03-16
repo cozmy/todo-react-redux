@@ -1,10 +1,10 @@
-import { Chip, makeStyles } from '@material-ui/core';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { Chip, makeStyles } from "@material-ui/core";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import { labelsSelectors } from '../redux/labels';
-import { TState } from '../redux/store';
-import { Todo } from '../types';
+import { labelsSelectors } from "../redux/labels";
+import { TState } from "../redux/store";
+import { Todo } from "../types";
 
 export const useStyles = makeStyles((theme) => ({
   label: {

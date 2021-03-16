@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
 
         return "none";
       },
-      content: '""',
+      content: "\"\"",
       height: "100%",
       left: 0,
       position: "absolute",
@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   accordionSummary: {
     // Prevents the moving effect
-    margin: '12px 0 !important'
+    margin: "12px 0 !important",
   },
   accordionSummaryContent: {
     alignItems: "center",

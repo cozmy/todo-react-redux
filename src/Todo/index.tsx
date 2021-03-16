@@ -1,15 +1,15 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, Grid, Hidden, Input, MenuItem, TextField, Typography } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { KeyboardDatePicker } from '@material-ui/pickers';
-import { format } from 'date-fns';
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, Grid, Hidden, Input, MenuItem, TextField, Typography } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { KeyboardDatePicker } from "@material-ui/pickers";
+import { format } from "date-fns";
+import React from "react";
+import { useDispatch } from "react-redux";
 
-import LabelsPreview from '../Labels/LabelsPreview';
-import LabelsSelect from '../Labels/LabelsSelect';
-import { todosActions } from '../redux/todos';
-import { dateFormat, Todo as TodoClass, TTodoPriority } from '../types';
-import { useStyles } from './styles';
+import LabelsPreview from "../Labels/LabelsPreview";
+import LabelsSelect from "../Labels/LabelsSelect";
+import { todosActions } from "../redux/todos";
+import { dateFormat, Todo as TodoClass, TTodoPriority } from "../types";
+import { useStyles } from "./styles";
 
 function Todo({ id, title, description, completionDate, dueDate, labels, priority }: TodoClass) {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function Todo({ id, title, description, completionDate, dueDate, labels, priorit
             </Hidden>
             {dueDate ? (
               <Typography className={classes.dueDate} variant="body2">
-                {format(new Date(dueDate), 'dd.MM.yyyy')}
+                {format(new Date(dueDate), "dd.MM.yyyy")}
               </Typography>
             ) : null}
           </div>
@@ -58,7 +58,7 @@ function Todo({ id, title, description, completionDate, dueDate, labels, priorit
                     label="Due date"
                     onChange={(date) => {
                       if (date?.getTime && !isNaN(date.getTime())) {
-                        update({ dueDate: date.toISOString().split('T')[0] });
+                        update({ dueDate: date.toISOString().split("T")[0] });
                       } else if (date === null) {
                         update({ dueDate: undefined });
                       }

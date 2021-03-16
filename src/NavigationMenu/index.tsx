@@ -1,21 +1,21 @@
-import { Collapse, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Collapse, List, ListItem, ListItemText, makeStyles } from "@material-ui/core";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import React from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-import { labelsSelectors } from '../redux/labels';
-import { todosSelectors } from '../redux/todos';
-import { routes } from '../routes';
+import { labelsSelectors } from "../redux/labels";
+import { todosSelectors } from "../redux/todos";
+import { routes } from "../routes";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
-    paddingLeft: theme.spacing(4)
+    paddingLeft: theme.spacing(4),
   },
   linkActive: {
-    background: theme.palette.action.selected
-  }
+    background: theme.palette.action.selected,
+  },
 }));
 
 function NavigationMenu() {

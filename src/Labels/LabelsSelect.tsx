@@ -1,8 +1,8 @@
-import { MenuItem, TextField, TextFieldProps } from '@material-ui/core';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { MenuItem, TextField, TextFieldProps } from "@material-ui/core";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import { labelsSelectors } from '../redux/labels';
+import { labelsSelectors } from "../redux/labels";
 
 function LabelsSelect({ SelectProps, ...rest }: Partial<TextFieldProps>) {
   const labels = useSelector(labelsSelectors.selectAll);
