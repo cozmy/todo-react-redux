@@ -22,8 +22,8 @@ function Todo({ id, title, description, completionDate, dueDate, labels, priorit
 
   return (
     <Box className={classes.root}>
-      <Accordion className={classes.accordion} TransitionProps={{ unmountOnExit: true }}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <Accordion className={classes.accordion} TransitionProps={{ unmountOnExit: true }} square>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} classes={{ content: classes.accordionSummary }}>
           <div className={classes.accordionSummaryContent} onClick={(event) => event.stopPropagation()} onFocus={(event) => event.stopPropagation()}>
             <Checkbox
               checked={!!completionDate}
@@ -37,7 +37,7 @@ function Todo({ id, title, description, completionDate, dueDate, labels, priorit
             </Hidden>
             {dueDate ? (
               <Typography className={classes.dueDate} variant="body2">
-                {format(new Date(dueDate), "dd.MM.yyyy")}
+                {format(new Date(dueDate), 'dd.MM.yyyy')}
               </Typography>
             ) : null}
           </div>
@@ -58,7 +58,7 @@ function Todo({ id, title, description, completionDate, dueDate, labels, priorit
                     label="Due date"
                     onChange={(date) => {
                       if (date?.getTime && !isNaN(date.getTime())) {
-                        update({ dueDate: date.toISOString().split("T")[0] });
+                        update({ dueDate: date.toISOString().split('T')[0] });
                       } else if (date === null) {
                         update({ dueDate: undefined });
                       }

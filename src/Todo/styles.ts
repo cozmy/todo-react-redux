@@ -31,6 +31,10 @@ export const useStyles = makeStyles((theme) => ({
   accordionDetails: {
     paddingTop: 0,
   },
+  accordionSummary: {
+    // Prevents the moving effect
+    margin: '12px 0 !important'
+  },
   accordionSummaryContent: {
     alignItems: "center",
     display: "flex",
