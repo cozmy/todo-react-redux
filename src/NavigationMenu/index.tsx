@@ -1,26 +1,28 @@
-import { Collapse, List, ListItem, ListItemText, makeStyles } from "@material-ui/core";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import React from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Collapse, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
-import { labelsSelectors } from "../redux/labels";
-import { routes } from "../routes";
+import { labelsSelectors } from '../redux/labels';
+import { todosSelectors } from '../redux/todos';
+import { routes } from '../routes';
 
 const useStyles = makeStyles((theme) => ({
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(4)
   },
   linkActive: {
-    background: theme.palette.action.selected,
-  },
+    background: theme.palette.action.selected
+  }
 }));
 
 function NavigationMenu() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const labels = useSelector(labelsSelectors.selectAll);
+  const todos = useSelector(todosSelectors.selectAllIncomplete);
 
   return (
     <List component="nav">
@@ -41,13 +43,13 @@ function NavigationMenu() {
         <List component="div" disablePadding>
           {labels.map((label) => (
             <ListItem button component={NavLink} to={routes.label.to(label.id)} className={classes.nested} activeClassName={classes.linkActive} key={label.id}>
-              <ListItemText secondary={label.title} />
+              <ListItemText secondary={`${label.title} (${todos.filter(todo => todo.labels.includes(label.id)).length})`} />
             </ListItem>
           ))}
         </List>
       </Collapse>
 
-      {/* 
+      {/*
       <ListItem button>
         <ListItemText primary="Statistics" secondary="Coming soon..." />
       </ListItem>
